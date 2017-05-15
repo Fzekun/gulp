@@ -1,0 +1,14 @@
+$blue:blue;
+$red:red;
+$yellow:yellow;
+.blue{
+  color:$red;
+}
+body{
+  background: red;
+}
+.box{
+  width: 100px;
+  height: 200px;
+  background: url("../images/1.gif") no-repeat;
+}
