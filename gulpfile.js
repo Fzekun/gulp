@@ -31,7 +31,8 @@ gulp.task('js',['clean'],function() {
         .pipe(gulp.dest('./rev/js'));
 });
 gulp.task("clean", function(){
-    return del(['dest']);
+    return gulp.src('./dest')
+        .pipe(clean({ force : true }))
 })
 gulp.task("cleanRev", function(){
     return gulp.src('./rev')
@@ -45,7 +46,7 @@ gulp.task('webserver', function() {
         }
     });
     gulp.watch("src/scss/*.scss", ['sass']);
-    gulp.watch("src/js/*.js", ['js']);
+    gulp.watch("src/js/*.js").on('change', reload);
     gulp.watch("src/*.html").on('change', reload);
 
 });
@@ -65,6 +66,6 @@ gulp.task('rev',function() {
 //     gulp.watch(['./src/scss/*.scss']);
 // })
 // 定义默认任务
-gulp.task('default', ['rev','webserver']);
-gulp.task('build', ['clean']);
+gulp.task('default', ['webserver']);
+gulp.task('build', ['clean','rev','js','sass']);
 
